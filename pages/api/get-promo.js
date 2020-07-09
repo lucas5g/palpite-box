@@ -17,11 +17,11 @@ export default async(req, res) => {
     
     const mostrarPromocaoCell = await sheet.getCell(1, 0)
     //console.log(mostrarPromocaoCell)
-    console.log(mostrarPromocaoCell.value)
+    //console.log(mostrarPromocaoCell.value)
 
  
     const textoCell = sheet.getCell(1, 1)
-    console.log(textoCell)
+    //console.log(textoCell)
 
     res.end(JSON.stringify({
       showCoupon: mostrarPromocaoCell.value === 'VERDADEIRO',

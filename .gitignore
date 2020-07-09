@@ -1,5 +1,2 @@
 node_modules
-.next/cache
-.next/static/webpack/
 .next
-yarn.lock
