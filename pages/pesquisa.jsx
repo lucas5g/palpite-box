@@ -3,11 +3,16 @@ import Link from 'next/link'
 
 const Pesquisa = () => {
   const [form, setForm] = useState({
-    Nome: 'lucas de sousa',
-    Email: 'lucasdesousa19@hotmail.com',
-    Whatsapp: '31 97305-6405'
+    Nome: '',
+    Email: '',
+    Whatsapp: '',
+    Nota: 3
   })
 
+  const notas = [1, 2, 3, 4, 5]
+  const [success, setSuccess] = useState(false)
+  const [retorno, setRetorno] = useState({})
+  let checkedVerify
   const save = async () => {
     try {
       const response = await fetch('/api/save', {
@@ -15,10 +20,20 @@ const Pesquisa = () => {
         body: JSON.stringify(form)
       })
       const data = await response.json()
-      console.log(data)
+      setSuccess(true)
+      setRetorno(data)
+
     } catch (err) {
       console.log(err)
     }
+  }
+
+  const onChange = event => {
+    const { name, value } = event.target
+
+    setForm({
+      ...form, [name]: value
+    })
   }
 
   return (
@@ -29,14 +44,32 @@ const Pesquisa = () => {
         Por isso, estamos sempre abertos a ouvir a sua opnião.
       </p>
       <div className="w-1/5 mx-auto">
-        <label className='font-bold'>Seu nome:</label>
-        <input type="text" className='p-4 block shadow bg-blue-100 my-2 rounded' placeholder='Nome' />
-        <input type="email" className='p-4 block shadow bg-blue-100 my-2 rounded' placeholder='E-mail' />
-        <input type="text" className='p-4 block shadow bg-blue-100 my-2 rounded' placeholder='Whatsapp' />
+        <label className='font-bold'>Nome</label>
+        <input type="text" className='p-4 block shadow bg-blue-100 my-2 rounded' placeholder='Nome' name='Nome' onChange={onChange} value={form.Nome} />
+
+        <label className='font-bold'>E-mail:</label>
+        <input type="email" className='p-4 block shadow bg-blue-100 my-2 rounded' placeholder='E-mail' name='Email' onChange={onChange} value={form.Email} />
+
+        <label className='font-bold'>Whatsapp</label>
+        <input type="text" className='p-4 block shadow bg-blue-100 my-2 rounded' placeholder='Whatsapp' name='Whatsapp' onChange={onChange} value={form.Whatsapp} />
+
+        <div className="flex py-6">
+
+          {notas.map(nota => (
+            <label  key={nota} className='block w-1/6 text-center'>
+              {nota} <br />
+              <input type="radio" name='Nota' value={nota} onChange={onChange} checked={nota === 3 && "checked"} />
+            </label>
+          ))}
+
+        </div>
+
         <button className='bg-blue-400 px-12 py-4 font-bold rounded-lg hover:shadow' onClick={save}>Salvar</button>
+        {/*}
         <pre>
-          {JSON.stringify(form, null,2)}
+          {JSON.stringify(form, null, 2)}
         </pre>
+        */}
       </div>
 
 
