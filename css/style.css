@@ -3,3 +3,13 @@
 @import 'tailwindcss/components';
 
 @import 'tailwindcss/utilities';
+
+
+#__next{
+  @apply grid grid-rows-3;
+}
+
+header{
+  @apply row-span-1;
+  
+}

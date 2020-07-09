@@ -4,7 +4,8 @@ import Link from 'next/link'
 const Header = () => {
 
   return (
-    <>
+    <header>
+
       <div className='bg-gray-300 p-6 shadow-md'>
         <h1 className='mx-auto text-center font-bold'>
           <Link href='/'>
@@ -23,7 +24,7 @@ const Header = () => {
           <a className='px-2 hover:underline'>Pesquisa</a>
         </Link>
       </div>
-    </>
+    </header>
   )
 }
 
